@@ -1,0 +1,37 @@
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('recipe-form');
+    const recipesContainer = document.getElementById('recipes-container');
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+    });
+
+    document.getElementById('add-recipe').addEventListener('click', function () {
+        const recipeName = document.getElementById('recipe-name').value;
+        const recipeIngredients = document.getElementById('recipe-ingredients').value;
+        const recipeInstructions = document.getElementById('recipe-instructions').value;
+
+        if (recipeName && recipeIngredients && recipeInstructions) {
+            addRecipe(recipeName, recipeIngredients, recipeInstructions);
+            form.reset();
+        } else {
+            alert('Please fill out all fields.');
+        }
+    });
+
+    function addRecipe(name, ingredients, instructions) {
+        const recipeDiv = document.createElement('div');
+        recipeDiv.classList.add('recipe');
+
+        const recipeHTML = `
+            <h2>${name}</h2>
+            <h3>Ingredients:</h3>
+            <p>${ingredients}</p>
+            <h3>Instructions:</h3>
+            <p>${instructions}</p>
+        `;
+
+        recipeDiv.innerHTML = recipeHTML;
+        recipesContainer.appendChild(recipeDiv);
+    }
+});
