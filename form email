@@ -1,0 +1,23 @@
+<?php
+$servername="localhost";
+$username="root";
+$password="";
+$dbname="library";
+$conn=new mysqli($servername,$username,$password,$dbname);
+if(!$conn){
+die('could not connect:'.mysqli_connect_error());
+}
+echo 'successfully connected<br/>';
+$stmt=$conn->prepare("INSERT INTO book(username,password,email,number)VALUES(?,?,?,?)");
+$stmt->bind_param("sssi",$u,$p,$e,$n);
+$u=$_POST["user"];
+$p=$_POST["pass"];
+$e=$_POST["email"];
+$n=$_POST["number"];
+$stmt->execute();
+echo"INSERTED SUCCESSFULLY";
+$stmt->close();
+$conn->close();
+header("refresh2;url=home.html");
+?>
+
